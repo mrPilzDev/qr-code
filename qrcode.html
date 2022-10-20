@@ -2,28 +2,44 @@
 <html>
   <head>
     <title>Instascan</title>
-    <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js" ></script>	
+ 
+  	
   </head>
   <body>
     <video id="preview"></video>
+    <script type="text/javascript" src="instascan.min.js" ></script>
     <script>
-        let scanner = new Instascan.Scanner(
+        const scanner = new Instascan.Scanner(
+            
             {
-                video: document.getElementById('preview')
-            }
-        );
-        scanner.addListener('scan', function(content) {
-            alert('Escaneou o conteudo: ' + content);
+            video: document.querySelector("#preview")
+               
+            } )
+ ligarCamera();
+        function ligarCamera() {
+    navigator.mediaDevices.getUserMedia({ video: true }).then(function (mediaStream) {
+        const video = document.querySelector('#preview');
+        video.srcObject = mediaStream;
+        video.play();
+       
+
+    })
+}
+        scanner.addListener('scan',content =>
+           {
+                        alert('Escaneou o conteudo: ' + content);
             window.open(content, "_blank");
-        });
+        })
         Instascan.Camera.getCameras().then(cameras => 
         {
+            console.log(cameras);
             if(cameras.length > 0){
+                console.log(cameras);
                 scanner.start(cameras[0]);
             } else {
                 console.error("Não existe câmera no dispositivo!");
             }
-        });
+        })
     </script>
 
  </body>
