@@ -9,7 +9,7 @@
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 
-<body>
+<body onload="initializeCamera()">
   <section class="section">
     <div class="container">
       <div class="columns">
@@ -18,13 +18,13 @@
             Ler Qr-code
           </h1>
           <video autoplay id="video"></video>
-          <button class="button is-hidden" id="btnPlay">
+          <button class="button is-hidden" id="btnPlay" onclick="lig()">
             <span class="icon is-small">
               <i class="fas fa-play"></i>
             </span>
           </button>
           
-          </button>
+          
           <button class="button is-success" id="btnScreenshot">
             <span class="icon is-small">
               <i class="fas fa-camera"></i>
